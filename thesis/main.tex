@@ -71,6 +71,8 @@ The thesis reports the following empirical and theoretical results. For 1D Helmh
 
 A short interpretability section applies a functional analysis-of-variance (ANOVA) decomposition to the trained 2D Helmholtz LC-PINN. The dominant subset is the three-way interaction $S_{xyk} = 0.43$, with bootstrap 95\,\% confidence interval $[0.41, 0.44]$. By ANOVA orthogonality, this implies an a-priori lower bound on the relative-$L^2$ error of any architecturally simpler solver: an additive solver $u(x, y, k) = f_{xy}(x, y) + f_k(k)$ has floor $\sqrt{S_{xk} + S_{yk} + S_{xyk}} \approx 0.76$; a pair-additive solver has floor $\sqrt{S_{xyk}} \approx 0.66$. We verify the predictions to within $0.002$ absolute against the exact analytic projection at $N = 10^6$ samples.
 
+Source code, configuration files, and the LaTeX manuscript are released at \url{https://github.com/annalzrv/bachelor_thesis}.
+
 \section*{Keywords}
 \addcontentsline{toc}{section}{Keywords}
 
@@ -91,6 +93,8 @@ physics-informed neural networks; loss-conditional training; parametric partial 
 Основные результаты. Для 1D-Гельмгольца на $k \in [1, 10]$ один LC-PINN достигает средней относительной $L^2$-ошибки $9{,}39 \times 10^{-4}$ на пятиточечной сетке, превосходя SA-PINN~\cite{mcclenny2020sapinn} в $3{,}4\times$ и ReLoBRaLo~\cite{bischof2021relobralo} в $4{,}1\times$ при меньшем суммарном времени обучения, чем суммарное переобучение пяти отдельных PINN. Для Шрёдингера 1D LC-PINN достигает $1{,}99 \times 10^{-4}$ средней относительной $L^2$-ошибки по семейству $\alpha \in [0{,}5, 10]$, в $20\times$ лучше per-$\alpha$ SA-PINN-бейзлайна. Тесты 2D- и 3D-Гельмгольца расширяют метод без изменения архитектурного ядра. В режиме весов потерь один LC-PINN на вязком Бюргерсе достигает усреднённой по $K=100$ выборкам относительной $L^2$-ошибки $3{,}47 \times 10^{-3}$, сравниваясь с сильнейшим single-shot бейзлайном с точностью до фактора 2 и превосходя адаптивно-взвешенные бейзлайны более чем на порядок. На вязко-регуляризованном Бакли--Леверетте ($\varepsilon = 10^{-2}$), приложении к пористым средам, мотивирующем работу, LC-PINN достигает относительной $L^2$-ошибки $1{,}03 \times 10^{-2}$, тогда как SA-PINN насыщается выше $0{,}4$. Локальный анализ оптимизации (теорема~\ref{thm:loss-decay}) объясняет систематическое улучшение в параметрическом режиме: дополнительные FiLM-степени свободы расширяют допустимое множество направлений спуска в пространстве параметров, обеспечивая мгновенную скорость убывания лосса не меньшую, чем у стандартного PINN в том же эффективном параметрическом векторе. Дополнительный результат об инвариантности по $\param$ (предложение~\ref{prop:lambda-invariance}) показывает, что глобальные минимизаторы LC-целевой функции восстанавливают минимизаторы остаточной функции по всему семейству.
 
 Краткий раздел по интерпретируемости применяет функциональное ANOVA-разложение к обученному LC-PINN на 2D-Гельмгольце. Доминирующим оказывается трёхместное взаимодействие $S_{xyk} = 0{,}43$ (бутстрэп 95\,\%~ДИ $[0{,}41,\,0{,}44]$). По ортогональности ANOVA это влечёт априорную нижнюю границу относительной $L^2$-ошибки для архитектурно более простых решателей: аддитивный решатель $u(x, y, k) = f_{xy}(x, y) + f_k(k)$ имеет порог $\sqrt{S_{xk} + S_{yk} + S_{xyk}} \approx 0{,}76$; парно-аддитивный --- порог $\sqrt{S_{xyk}} \approx 0{,}66$. Предсказания подтверждены с точностью до $0{,}002$ абсолютной ошибки против точной аналитической проекции на $N = 10^6$ выборках.
+
+Исходный код, конфигурационные файлы и {\LaTeX}-источник работы доступны по адресу \url{https://github.com/annalzrv/bachelor_thesis}.
 
 \section*{Ключевые слова}
 \addcontentsline{toc}{section}{Ключевые слова}
@@ -704,7 +708,14 @@ This section is provided in compliance with the HSE regulation on plagiarism, ge
 \section{Code availability}
 \label{app:code}
 
-The LC-PINN training and evaluation code is available at \texttt{thesis/code/} of the project repository. The ANOVA decomposition code is at \texttt{anova/lc\_anova/}. All experimental results in this thesis are reproducible from the committed checkpoints and the scripts under \texttt{thesis/code/scripts/}; per-experiment hyperparameters are recorded in the JSON output files alongside the rel-$L^2$ numbers.
+The full source code, LaTeX manuscript, configuration files, and experimental results for this thesis are released as a public GitHub repository:
+\begin{center}
+\url{https://github.com/annalzrv/bachelor_thesis}
+\end{center}
+
+The repository contains three top-level directories. \texttt{thesis/} holds the LaTeX source of this manuscript (builds with LuaLaTeX + biber). \texttt{code/} holds the LC-PINN training pipeline (PyTorch), with entry-point scripts under \texttt{code/scripts/} for each PDE family discussed in Section~\ref{sec:experiments}. \texttt{anova/} holds the functional-ANOVA decomposition module used in Section~\ref{subsec:anova}.
+
+Trained checkpoints are excluded from the repository to keep its footprint small but can be regenerated by running the training scripts; per-seed configuration and the resulting rel-$L^2$ numbers are recorded in the JSON output files under \texttt{code/results/} and \texttt{anova/results/}.
 
 \section{Proof details}
 \label{app:proofs}
