@@ -1,0 +1,24 @@
+========================================================================
+ABSTRACT (English)
+========================================================================
+
+Physics-informed neural networks (PINNs) approximate PDE solutions by minimising a weighted combination of residual, boundary, initial, and data losses. Performance is dominated by two choices fixed before training: the loss weights and the physical parameters of the PDE. A poor weighting collapses training onto one constraint; a different parameter value requires retraining from scratch. Existing remedies select or adapt a single configuration. We take a different view: instead of tuning one vector, we condition the network on it and explore the entire family during training.
+
+This thesis develops the loss-conditional PINN (LC-PINN), a single network in which the conditioning vector lambda — either the loss-weight simplex or a physical PDE parameter — is an input. Training minimises an expected loss over a prior on lambda, so one network covers a continuous family of problems with no solver-generated paired data. One architecture and one algorithm cover both regimes; FiLM modulation with an L-BFGS refinement on a fixed quadrature support handles the parametric-coefficient case, and concatenation conditioning handles the loss-weight case.
+
+Empirically, a single LC-PINN improves over per-parameter retrained baselines by 3-6x on Helmholtz in one, two, and three spatial dimensions and on the parametric Schrödinger family; in the loss-weight regime it matches the strongest adaptive-weight baselines on viscous Burgers and on viscous-regularised Buckley-Leverett displacement — the porous-media application that motivates the work. Two theoretical results frame the empirical study: a lambda-invariance result that LC minimisers recover residual minimisers across the parameter family, and a local loss-decay advantage that the conditional parameterisation enlarges the descent set rather than shifting the optimum.
+
+A short interpretability section applies a functional ANOVA decomposition to the trained two-dimensional Helmholtz LC-PINN in the joint space of the spatial coordinates and the wavenumber. The decomposition isolates a dominant three-way interaction among the two spatial coordinates and the wavenumber, from which we derive an a-priori lower bound on the relative-L2 error attainable by any architecturally simpler solver — additive, or pairwise-additive — on the same parametric family. The bound is verified against the analytic projection on the manufactured reference solution.
+
+
+========================================================================
+АННОТАЦИЯ (Russian)
+========================================================================
+
+Физически информированные нейронные сети (PINN) приближают решения УЧП минимизацией взвешенной комбинации остаточных, граничных, начальных и дата-потерь. Эффективность определяется двумя выборами, фиксируемыми до обучения: весами потерь и значениями физических параметров уравнения. Плохое взвешивание приводит к вырожденному решению; иное значение параметра требует переобучения с нуля. Существующие методы подбирают одну конфигурацию. Мы предлагаем другой взгляд: вместо подгонки одного вектора подаём его в сеть и исследуем всё семейство в ходе обучения.
+
+В работе развивается loss-conditional PINN (LC-PINN) — единая сеть, в которой обусловливающий вектор lambda (симплекс весов потерь либо физический параметр УЧП) является входом. Минимизируется ожидаемая функция потерь по априорному распределению, так что одна сеть охватывает непрерывное семейство задач без сгенерированных солвером парных данных. Один и тот же алгоритм работает в обоих режимах: FiLM-модуляция с L-BFGS-доводкой на фиксированной квадратуре в параметрическом режиме, конкатенация — в режиме весов потерь.
+
+Эмпирически один LC-PINN улучшает per-parameter переобученные бейзлайны в 3-6x на Гельмгольце в одном, двух и трёх пространственных измерениях и на параметрическом Шрёдингере; в режиме весов потерь — сравним с сильнейшими адаптивно-взвешенными бейзлайнами на вязком Бюргерсе и на вязко-регуляризованном Бакли-Леверетте (приложение к пористым средам, мотивирующее работу). Два теоретических результата обрамляют эмпирику: lambda-инвариантность минимумов и локальное преимущество скорости убывания лосса у условной параметризации.
+
+Краткий раздел по интерпретируемости применяет функциональное ANOVA-разложение к обученному двумерному Гельмгольц-LC-PINN в совместном пространстве пространственных координат и волнового числа. Разложение выявляет доминирующее тройное взаимодействие двух пространственных координат и волнового числа, из которого выводится априорная нижняя граница относительной L2-ошибки для любого архитектурно более простого решателя — аддитивного либо парно-аддитивного — на том же параметрическом семействе. Граница проверена против аналитической проекции на эталонном решении.
