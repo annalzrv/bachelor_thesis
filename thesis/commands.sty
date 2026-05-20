@@ -1,0 +1,47 @@
+% commands.sty — math macros and shortcuts.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{commands}[2026/05/19 Thesis math commands]
+
+% --- common math operators ---
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sgn}{sgn}
+
+% --- expectation, probability ---
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prb}{\mathbb{P}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Cplx}{\mathbb{C}}
+\newcommand{\Indc}{\mathbb{1}}
+
+% --- norms and inner products ---
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\inner}[2]{\left\langle #1,\, #2 \right\rangle}
+
+% --- vectors and matrices ---
+\newcommand{\vct}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+% --- LC-PINN specific ---
+\newcommand{\LCPINN}{LC-PINN}
+\newcommand{\PINN}{PINN}
+\newcommand{\PDE}{PDE}
+\newcommand{\HDMR}{HDMR}
+\newcommand{\ANOVA}{ANOVA}
+\newcommand{\Sobol}{Sobol}
+\newcommand{\rell}{rel-$L^2$}
+\newcommand{\relL}{\mathrm{rel}\text{-}L^2}
+
+% --- physics: physical parameter symbol ---
+\newcommand{\param}{\lambda}
+
+% --- relative-L2 number with formatting ---
+\newcommand{\relltwo}[1]{\(\mathrm{rel}\text{-}L^2 = #1\)}

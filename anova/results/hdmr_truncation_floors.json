@@ -1,0 +1,32 @@
+{
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_helmholtz_2d_seed0_film_lbfgs_w64.pt",
+  "N_train": 200000,
+  "N_val": 50000,
+  "sobol_indices_measured": {
+    "S_x": 0.046408651562537005,
+    "S_y": 0.0569646328001439,
+    "S_k": 0.01541211686939725,
+    "S_xy": 0.1448822926701704,
+    "S_xk": 0.09551774699882326,
+    "S_yk": 0.07103489785878117,
+    "S_xyk": 0.569779661240147
+  },
+  "predicted_floor": {
+    "order_0": 1.0,
+    "order_1": 0.9387303120534256,
+    "order_2": 0.7548375065139166,
+    "order_3": 0.0
+  },
+  "measured_truncation_rel_l2": {
+    "order_0": 1.0,
+    "order_1": 1.1247823238372803,
+    "order_2": 1.412179708480835,
+    "order_3": 0.45556706190109253
+  },
+  "var_remaining_ratio": {
+    "order_0": 1.0,
+    "order_1": 1.2651487588882446,
+    "order_2": 1.9943022727966309,
+    "order_3": 0.20750100910663605
+  }
+}

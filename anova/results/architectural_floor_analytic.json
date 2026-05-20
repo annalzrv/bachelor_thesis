@@ -1,0 +1,51 @@
+{
+  "N": 1000000,
+  "n_bins": 40,
+  "seed": 42,
+  "var_u_ref": 0.052211668386885124,
+  "f0": 0.04591440734230613,
+  "sobol": {
+    "x": 0.03991630811930129,
+    "y": 0.03944500046603239,
+    "k": 0.0735382198077468,
+    "xy": 0.2766195503253894,
+    "xk": 0.07170287380803317,
+    "yk": 0.07183132833055447,
+    "xyk": 0.4300885411781475
+  },
+  "sobol_sum": 1.003141822035205,
+  "predictions": {
+    "order_0_constant": 1.0,
+    "order_1_mains": 0.9220858385433129,
+    "additive_xy_plus_k": 0.7573788637905966,
+    "order_2_all_pairs": 0.6558113609706281,
+    "order_3_full": 0.0
+  },
+  "results": {
+    "order_0_constant": {
+      "predicted_floor": 1.0,
+      "measured_rel_l2": 0.9999999999999957,
+      "agreement": true
+    },
+    "order_1_mains": {
+      "predicted_floor": 0.9220858385433129,
+      "measured_rel_l2": 0.9203801885497819,
+      "agreement": true
+    },
+    "additive_xy_plus_k": {
+      "predicted_floor": 0.7573788637905966,
+      "measured_rel_l2": 0.7553845513425389,
+      "agreement": true
+    },
+    "order_2_all_pairs": {
+      "predicted_floor": 0.6558113609706281,
+      "measured_rel_l2": 0.6558113609706252,
+      "agreement": true
+    },
+    "order_3_full": {
+      "predicted_floor": 0.0,
+      "measured_rel_l2": 9.700012579090504e-17,
+      "agreement": true
+    }
+  }
+}

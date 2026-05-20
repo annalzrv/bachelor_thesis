@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# LaTeX build artefacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# Compiled documents — track sources only
+thesis/main.pdf
+
+# Heavy model checkpoints — regenerate with the training scripts
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+
+# Heavy training logs and intermediate datasets
+*.log
+logs/
+*.npz
+*.npy
+results/**/*.log
+results/**/*.npz
+
+# Audio / transcripts
+*.m4a
+*.mp3
+*.wav
+*-transcript.md
+*-transcript.txt
+
+# Other large binaries
+*.zip
+*.tar.gz

@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.ipynb_checkpoints/
+results/
+qa.md
+.DS_Store
+logs/
+checkpoints/
+
+# LaTeX build artifacts (per-submission folders)
+paper_neurips/main.aux
+paper_neurips/main.bbl
+paper_neurips/main.blg
+paper_neurips/main.log
+paper_neurips/main.out
+paper_neurips/main.toc
+paper_icml/main.aux
+paper_icml/main.bbl
+paper_icml/main.blg
+paper_icml/main.log
+paper_icml/main.out
+paper_icml/main.toc

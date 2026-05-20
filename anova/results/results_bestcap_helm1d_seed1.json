@@ -1,0 +1,89 @@
+{
+  "pde": "helmholtz_1d",
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_helmholtz_seed1_film_lbfgs.pt",
+  "tag": "bestcap_helm1d_seed1",
+  "meta": {
+    "conditioning": "film",
+    "hidden_dims": [
+      64,
+      64,
+      64,
+      64
+    ],
+    "n_params": 46081
+  },
+  "lc_pinn_vs_reference_rel_l2": 0.0008854627958498895,
+  "jointhdmr_val_rel_rmse": 0.03616990149021149,
+  "sobol_indices": {
+    "x": 0.14065048483325945,
+    "k": 0.20666949545256422,
+    "x/k": 0.6526800197141763
+  },
+  "history": [
+    {
+      "phase": 1,
+      "ep": 20,
+      "rel": 0.8100101947784424
+    },
+    {
+      "phase": 1,
+      "ep": 40,
+      "rel": 0.807510256767273
+    },
+    {
+      "phase": 1,
+      "ep": 60,
+      "rel": 0.8070495128631592
+    },
+    {
+      "phase": 2,
+      "ep": 20,
+      "rel": 0.08716664463281631
+    },
+    {
+      "phase": 2,
+      "ep": 40,
+      "rel": 0.05128803476691246
+    },
+    {
+      "phase": 2,
+      "ep": 60,
+      "rel": 0.040635909885168076
+    },
+    {
+      "phase": 2,
+      "ep": 80,
+      "rel": 0.03440166637301445
+    },
+    {
+      "phase": 2,
+      "ep": 100,
+      "rel": 0.035301558673381805
+    },
+    {
+      "phase": 2,
+      "ep": 120,
+      "rel": 0.02986087091267109
+    },
+    {
+      "phase": 2,
+      "ep": 140,
+      "rel": 0.03139929845929146
+    },
+    {
+      "phase": 2,
+      "ep": 160,
+      "rel": 0.029235057532787323
+    },
+    {
+      "phase": 2,
+      "ep": 180,
+      "rel": 0.027575012296438217
+    },
+    {
+      "phase": 2,
+      "ep": 200,
+      "rel": 0.02377863973379135
+    }
+  ]
+}

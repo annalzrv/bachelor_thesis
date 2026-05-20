@@ -1,0 +1,24 @@
+Physics-informed neural networks (PINNs) require a fresh training
+run for any change in the residual: a new wavenumber, a new
+mobility ratio, a new loss-weight balance. Operator-learning
+methods (FNO, DeepONet) amortise across a parametric family but
+require solver-generated paired (input, solution) examples
+\emph{in their training loop}. We close that gap. LC-PINN is a
+single residual-loss training run that produces a continuous
+family of PDE solutions over a parameter $\lambda$ --- a physical
+scalar coefficient or a loss-weight vector --- without paired
+training data, test-time adaptation, or per-$\lambda$ retuning.
+Reference solutions are used only to compute test-time error. The construction adapts loss-conditional
+networks \citep{dosovitskiy2020} to PINN training: $\lambda$
+becomes a network input drawn fresh from a fixed prior at every
+optimisation step. We prove a $\lambda$-invariance result --- at
+a global optimum of the $\lambda$-expected loss the network is a
+per-$\lambda$ residual minimiser for $p_\lambda$-almost every
+$\lambda$ --- with a finite-capacity corollary that bounds the
+suboptimality at every $\lambda$ in the support. Across 1D, 2D, and 3D parametric Helmholtz, 1D stationary Schrödinger
+with a multiplicative parametric potential, and loss-weight
+amortisation on viscous Burgers and Buckley--Leverett, LC reaches
+rel-$L^2$ within a factor of two of the strongest single-$\lambda$
+baseline. On 1D Helmholtz it is the only method whose rel-$L^2$
+stays within one order of magnitude across $k\!\in\![1,10]$ ---
+per-$k$ retrained baselines vary by three.

@@ -1,0 +1,27 @@
+{
+  "ig_normalised": [
+    0.3487359285354614,
+    0.3161710500717163,
+    0.3350929319858551
+  ],
+  "grad_normalised": [
+    0.4048115611076355,
+    0.37870165705680847,
+    0.21648681163787842
+  ],
+  "mc_sobol_first_normalised": [
+    0.2536702471670016,
+    0.26123515977471845,
+    0.48509459305827984
+  ],
+  "mc_sobol_first_raw": [
+    0.038138898172287876,
+    0.039276270153630354,
+    0.07293316222614474
+  ],
+  "mc_sobol_pair_xy": 0.27816936801487796,
+  "mc_sobol_pair_xk": 0.07306019468399033,
+  "mc_sobol_pair_yk": 0.07261342643671176,
+  "mc_sobol_triplet": 0.4258086803123569,
+  "note": "IG and gradient methods cannot reach pair or triplet indices \u2014 they are intrinsically first-order."
+}

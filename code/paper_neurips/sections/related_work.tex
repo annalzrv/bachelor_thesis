@@ -1,0 +1,72 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Adaptive loss weighting in PINNs.}
+The fragility of the composite-loss objective in the original PINN
+formulation \citep{raissi2019} has motivated a line of methods that
+adapt the residual / boundary / data weights during training.
+Self-adaptive PINN (SA-PINN) of \citet{mcclenny2020} attaches a
+trainable per-collocation-point weight that is updated by ascent on
+the residual, yielding an effective focusing of the network on
+hard-to-fit regions; their ``points-with-weights'' formulation is
+essentially a soft hard-example-mining for the residual. ReLoBRaLo
+\citep{bischof2021} re-balances loss-term weights from running
+ratios of the absolute loss values, smoothed by an exponential moving
+average. Causal-PINN \citep{wang2024} weights the residual by a
+time-causal mask so the network does not collapse onto late-time
+dynamics before fitting the initial-time region. These all produce
+\emph{one} solution for \emph{one} (adaptively-found) weighting and
+would need to be retrained at every new weighting the practitioner
+wishes to inspect.
+
+\paragraph{Operator learning.}
+A parallel line of work has built neural operators that map a
+function-valued input (boundary condition, forcing term, initial
+condition) to a function-valued solution. The Fourier Neural Operator
+(FNO) \citep{li2020fno} parameterises the operator in spectral space:
+linear layers on the lowest Fourier modes, plus a residual
+$1\!\times\!1$ convolution. DeepONet \citep{lu2021deeponet} factorises
+the operator into a branch network (encoding the input function at
+sensor points) and a trunk network (encoding the spatial coordinate),
+recombined by an inner product. Both methods amortise across a family
+of problems but require a precomputed dataset of (input, solution)
+pairs from a classical solver---they are supervised learners in
+function space. The PINN residual itself plays no role in their
+training. PI-DeepONet \citep{wang2021pi-deeponet} re-introduces the
+residual but stays inside the operator-learning framing, treating the
+input function as the parameter rather than a scalar coefficient.
+Our LC-PINN sits between these two camps: it amortises like
+operator learning but uses the residual loss like a PINN.
+
+\paragraph{Loss-conditional networks.}
+\citet{dosovitskiy2020} introduced the loss-conditional networks idea
+in image generation: a single generator, conditioned on the loss
+weights of a multi-objective composite reconstruction loss, produces
+images that interpolate the tradeoff surface (sharpness vs.\ perceptual
+fidelity vs.\ adversarial realism). The network is trained by sampling
+the weight vector from a fixed prior at every step and applying the
+freshly-sampled weights to the per-instance reconstruction loss.
+LC-PINN takes the same conditional-on-weights idea and applies it to
+the PDE-residual setting; the formal $\lambda$-invariance result
+(\Cref{sec:theorem}) is, to our knowledge, the first analysis of the
+optimum-set structure of this construction in the residual-loss
+case.
+
+\paragraph{Hypernetworks and meta-learning for PINNs.}
+A separate amortisation strategy uses hypernetworks
+\citep{ha2017hypernetworks} or MAML-style meta-learning
+\citep{finn2017maml} to produce per-instance PINN weights. PI-MAML
+\citep{liu2022pi-maml} demonstrates the meta-learning angle on
+parametric PDEs. These methods amortise at the level of network
+weights rather than a network input. They typically require a training
+distribution of full PDE \emph{tasks} and a per-task inner-loop
+adaptation step at test time; LC-PINN trains a single network with no
+inner loop and produces predictions for every $\lambda$ in one forward
+pass.
+
+\paragraph{Extrapolation in $\lambda$ vs.\ in physical parameters.}
+In the loss-weight mode the network's role is closest to
+\citet{dosovitskiy2020}; in the parametric-coefficient mode it is
+closest to FNO / DeepONet but parameterised over a low-dimensional
+scalar input rather than a function-valued one. The two modes share
+an architecture; the choice of $\lambda$ is task-driven.

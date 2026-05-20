@@ -1,0 +1,29 @@
+\section{Experiments}
+\label{sec:experiments}
+
+We evaluate LC-PINN on four parametric PDE families spanning the two
+amortisation modes of \Cref{sec:method}: a loss-weight family on
+viscous Burgers and Buckley--Leverett ($\lambda \!=\! w$,
+$d_\lambda \!=\! 4$); a parametric-coefficient family on Helmholtz
+in 1D, 2D, and 3D ($\lambda \!=\! k$, the wavenumber); and 1D
+Schrödinger with parametric harmonic potential ($\lambda \!=\! \alpha$,
+trap stiffness). Baselines: SA-PINN \citep{mcclenny2020}, ReLoBRaLo
+\citep{bischof2021}, Causal-PINN \citep{wang2024} (Burgers/BL only),
+FNO \citep{li2020fno}, and PI-DeepONet \citep{wang2021pi-deeponet}.
+Full equations, manufactured references, training budgets,
+and baseline hyperparameters are in \Cref{sec:appendix-hyper};
+collocation counts are listed in \Cref{tab:hyper-lc}.
+
+\paragraph{Evaluation protocol.}
+Loss-weight mode (Burgers, BL): $K$-shot averaged rel-$L^2$ at
+$K\!=\!100$ unless noted; the $K$-eval ablation in
+\Cref{sec:results-ablations} sweeps $K \in \{25, 50, 100, 200, 400\}$.
+Parametric-coefficient mode (Helmholtz): rel-$L^2$ at a fixed
+$k$-grid (1D: five points $\{1.00, 3.25, 5.50, 7.75, 10.00\}$;
+2D: three points $\{1.00, 5.50, 10.00\}$; 3D: three points
+$\{1, 3, 5\}$), averaged across the grid and then over seeds.
+Schrödinger uses a 20-point $\alpha$-grid for LC, restricted to the
+SA-PINN training points $\{0.5, 5.0, 10.0\}$ when reporting
+alongside SA. All numbers are
+mean $\pm$ std over 4 random seeds. Wall times are measured on a
+single Apple~M4 Max via the PyTorch~MPS backend.

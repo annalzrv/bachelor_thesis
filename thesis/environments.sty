@@ -1,0 +1,31 @@
+% environments.sty — theorem-like environments and other custom envs.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{environments}[2026/05/19 Thesis environments]
+
+% Theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+% (Optional: uncomment after `sudo tlmgr install tcolorbox` to enable a
+% framed-highlight environment for chapter-summary statements.)
+% \RequirePackage{tcolorbox}
+% \tcbset{
+%   highlightbox/.style={
+%     colback=gray!5, colframe=gray!40, boxrule=0.5pt, arc=2pt,
+%     left=6pt, right=6pt, top=4pt, bottom=4pt,
+%   }
+% }
+% \newenvironment{highlight}
+%   {\begin{tcolorbox}[highlightbox]}
+%   {\end{tcolorbox}}

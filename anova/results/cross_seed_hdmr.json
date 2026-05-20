@@ -1,0 +1,6 @@
+{
+  "train_on_seed": 0,
+  "eval_on_seed": 2,
+  "val_rel_rmse_own_seed": 0.5366993546485901,
+  "val_rel_rmse_cross_seed": 0.5546684861183167
+}

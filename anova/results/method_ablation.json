@@ -1,0 +1,94 @@
+{
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_helmholtz_2d_seed0_film_lbfgs_w64.pt",
+  "N_train": 100000,
+  "N_val": 30000,
+  "variants": [
+    {
+      "name": "fourier_order3_full",
+      "use_fourier": true,
+      "max_order": 3,
+      "phases": [
+        40,
+        80,
+        120
+      ],
+      "wall_seconds": 316.72922015190125,
+      "val_rel_rmse": 0.39779531955718994,
+      "sobol": {
+        "S_x": 0.047378503271190836,
+        "S_y": 0.10688660651355195,
+        "S_k": 0.03438168369611156,
+        "S_xy": 0.16509192455667612,
+        "S_xk": 0.06882792344649938,
+        "S_yk": 0.057577471187872965,
+        "S_xyk": 0.5198558873280972
+      },
+      "total_captured": 1.0
+    },
+    {
+      "name": "tanh_order3_no_fourier",
+      "use_fourier": false,
+      "max_order": 3,
+      "phases": [
+        40,
+        80,
+        120
+      ],
+      "wall_seconds": 314.2868118286133,
+      "val_rel_rmse": 0.5525805354118347,
+      "sobol": {
+        "S_x": 0.04976309422435316,
+        "S_y": 0.047626385543311625,
+        "S_k": 0.12719514369807294,
+        "S_xy": 0.3242063320758973,
+        "S_xk": 0.0978411473547316,
+        "S_yk": 0.08601517791542743,
+        "S_xyk": 0.267352719188206
+      },
+      "total_captured": 1.0
+    },
+    {
+      "name": "fourier_order2_no_triplet",
+      "use_fourier": true,
+      "max_order": 2,
+      "phases": [
+        40,
+        200,
+        null
+      ],
+      "wall_seconds": 295.0605471134186,
+      "val_rel_rmse": 0.6611924767494202,
+      "sobol": {
+        "S_x": 0.061832693528091454,
+        "S_y": 0.06437872508136522,
+        "S_k": 0.13765712798736596,
+        "S_xy": 0.4804516729068748,
+        "S_xk": 0.12914657998488707,
+        "S_yk": 0.1265332005114155
+      },
+      "total_captured": 1.0
+    },
+    {
+      "name": "fourier_order3_mains_only",
+      "use_fourier": true,
+      "max_order": 3,
+      "phases": [
+        200,
+        0,
+        0
+      ],
+      "wall_seconds": 189.73765516281128,
+      "val_rel_rmse": 0.9196870923042297,
+      "sobol": {
+        "S_x": 0.11384093823541966,
+        "S_y": 0.1258243255629428,
+        "S_k": 0.2364221297557669,
+        "S_xy": 0.07276696089546407,
+        "S_xk": 0.18868597624278322,
+        "S_yk": 0.16906438507417051,
+        "S_xyk": 0.09339528423345284
+      },
+      "total_captured": 1.0
+    }
+  ]
+}

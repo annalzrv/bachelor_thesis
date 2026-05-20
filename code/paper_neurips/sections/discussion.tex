@@ -1,0 +1,11 @@
+\section{Discussion}
+\label{sec:discussion}
+
+FiLM$+$L-BFGS makes LC-PINN coherent across the Helmholtz family:
+rel-$L^2$ varies by $<\!1$ order of magnitude across $k\!\in\![1,10]$
+while per-$k$ baselines vary by three; the grid-mean win is
+$\sim\!3$--$4\times$ across 1D/2D/3D. On Schrödinger a residual-only
+PI-DeepONet matches LC --- amortisation is architecture-robust for
+smooth potentials, while the wave operator rewards FiLM gating.
+Where solutions vary sharply (BL shocks, high-$k$ 2D) per-$\lambda$
+accuracy lags single-$\lambda$ training.

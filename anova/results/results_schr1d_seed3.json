@@ -1,0 +1,64 @@
+{
+  "pde": "schrodinger_1d",
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_schrodinger_seed3_film_lbfgs.pt",
+  "tag": "schr1d_seed3",
+  "meta": {
+    "conditioning": "film",
+    "hidden_dims": [
+      64,
+      64,
+      64,
+      64
+    ],
+    "n_params": 46081
+  },
+  "lc_pinn_vs_reference_rel_l2": 0.00012087887444067746,
+  "jointhdmr_val_rel_rmse": 0.010866057127714157,
+  "sobol_indices": {
+    "x": 0.9860645898013111,
+    "alpha": 0.010131719637906862,
+    "x/alpha": 0.003803690560782043
+  },
+  "history": [
+    {
+      "phase": 1,
+      "ep": 20,
+      "rel": 0.06297694891691208
+    },
+    {
+      "phase": 1,
+      "ep": 40,
+      "rel": 0.062063366174697876
+    },
+    {
+      "phase": 2,
+      "ep": 20,
+      "rel": 0.02336130104959011
+    },
+    {
+      "phase": 2,
+      "ep": 40,
+      "rel": 0.014458767138421535
+    },
+    {
+      "phase": 2,
+      "ep": 60,
+      "rel": 0.010901221074163914
+    },
+    {
+      "phase": 2,
+      "ep": 80,
+      "rel": 0.009305558167397976
+    },
+    {
+      "phase": 2,
+      "ep": 100,
+      "rel": 0.011567124165594578
+    },
+    {
+      "phase": 2,
+      "ep": 120,
+      "rel": 0.008407630026340485
+    }
+  ]
+}

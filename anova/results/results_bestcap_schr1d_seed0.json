@@ -1,0 +1,89 @@
+{
+  "pde": "schrodinger_1d",
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_schrodinger_seed0_film_lbfgs.pt",
+  "tag": "bestcap_schr1d_seed0",
+  "meta": {
+    "conditioning": "film",
+    "hidden_dims": [
+      64,
+      64,
+      64,
+      64
+    ],
+    "n_params": 46081
+  },
+  "lc_pinn_vs_reference_rel_l2": 8.835151675157249e-05,
+  "jointhdmr_val_rel_rmse": 0.011048120446503162,
+  "sobol_indices": {
+    "x": 0.9863809781519552,
+    "alpha": 0.009811904294547556,
+    "x/alpha": 0.003807117553497198
+  },
+  "history": [
+    {
+      "phase": 1,
+      "ep": 20,
+      "rel": 0.06331729143857956
+    },
+    {
+      "phase": 1,
+      "ep": 40,
+      "rel": 0.06295477598905563
+    },
+    {
+      "phase": 1,
+      "ep": 60,
+      "rel": 0.0627710297703743
+    },
+    {
+      "phase": 2,
+      "ep": 20,
+      "rel": 0.02239321917295456
+    },
+    {
+      "phase": 2,
+      "ep": 40,
+      "rel": 0.01608397625386715
+    },
+    {
+      "phase": 2,
+      "ep": 60,
+      "rel": 0.011161116883158684
+    },
+    {
+      "phase": 2,
+      "ep": 80,
+      "rel": 0.014275853522121906
+    },
+    {
+      "phase": 2,
+      "ep": 100,
+      "rel": 0.010275146923959255
+    },
+    {
+      "phase": 2,
+      "ep": 120,
+      "rel": 0.012217216193675995
+    },
+    {
+      "phase": 2,
+      "ep": 140,
+      "rel": 0.01775689795613289
+    },
+    {
+      "phase": 2,
+      "ep": 160,
+      "rel": 0.013870964758098125
+    },
+    {
+      "phase": 2,
+      "ep": 180,
+      "rel": 0.011317703872919083
+    },
+    {
+      "phase": 2,
+      "ep": 200,
+      "rel": 0.010089472867548466
+    }
+  ]
+}

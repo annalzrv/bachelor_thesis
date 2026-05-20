@@ -1,0 +1,66 @@
+%% LC-PINN paper -- main.tex
+%%
+%% Target venue: NeurIPS 2026 main track (9 pp).
+%% Double-blind submission.
+
+\documentclass{article}
+
+\PassOptionsToPackage{round}{natbib}
+\usepackage[main]{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{nicefrac}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue!50!black,
+            citecolor=blue!50!black,
+            urlcolor=blue!50!black}
+\usepackage{cleveref}
+
+\newtheorem{proposition}{Proposition}
+\Crefname{proposition}{Proposition}{Propositions}
+\newtheorem{corollary}[proposition]{Corollary}
+\Crefname{corollary}{Corollary}{Corollaries}
+
+\title{Loss-Conditional PINNs:\\
+       One Training Run for a Parametric PDE Family}
+
+\author{%
+  Anonymous Author(s)\\
+  Affiliation\\
+  Address\\
+  \texttt{anon.email@example.com}%
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/results}
+\input{sections/discussion}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\appendix
+\input{sections/appendix}
+
+\newpage
+\input{sections/checklist}
+
+\end{document}

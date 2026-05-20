@@ -1,0 +1,99 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Loss-conditional formulation}
+
+A standard PINN \citep{raissi2019} approximates the solution of a
+single PDE $F u = 0$ with auxiliary boundary, initial, and (optionally)
+data conditions $\{B u = g_B,\, I u = g_I,\, D u = g_D\}$ by minimising
+the weighted composite loss
+\begin{equation}
+   \mathcal{L}^{\mathrm{PINN}}(\theta;\, w) =
+     w_F \,\| F u_\theta \|_{L^2}^2 +
+     w_B \,\| B u_\theta - g_B \|_{L^2}^2 +
+     w_I \,\| I u_\theta - g_I \|_{L^2}^2 +
+     w_D \,\| D u_\theta - g_D \|_{L^2}^2 ,
+\label{eq:standard-pinn}
+\end{equation}
+in the network parameters~$\theta$. The choice
+$w = (w_F, w_B, w_I, w_D)$ controls a strong tradeoff between
+satisfying the residual and matching the auxiliary constraints; in
+practice the weights are tuned by grid search or by an adaptive
+schedule (SA-PINN \citep{mcclenny2020}, ReLoBRaLo \citep{bischof2021},
+Causal-PINN \citep{wang2024}).
+
+We replace the fixed-$w$ problem with a \emph{family} of problems
+indexed by a parameter vector $\lambda \in \Lambda$, where
+$\Lambda \subseteq \mathbb{R}^{d_\lambda}$ is either (i) the set of
+admissible loss weights itself
+($\lambda = w$, $d_\lambda = 4$ for Burgers and BL), or (ii) a
+physical parameter of the PDE such as a wavenumber or mobility ratio
+($\lambda = k$, $d_\lambda = 1$ for Helmholtz). The
+\emph{loss-conditional} PINN (LC-PINN) is a single network
+\begin{equation}
+   u_\theta : \Omega \times \Lambda \to \mathbb{R},
+\qquad
+   (x, \lambda) \mapsto u_\theta(x, \lambda),
+\label{eq:lc-network}
+\end{equation}
+trained to minimise the $\lambda$-expectation of the per-instance loss,
+\begin{equation}
+   J(\theta) = \mathbb{E}_{\lambda \sim p_\lambda}\!\left[
+       \mathcal{L}\bigl(\lambda;\, u_\theta(\cdot, \lambda)\bigr)
+   \right] ,
+\label{eq:lc-objective}
+\end{equation}
+where $p_\lambda$ is a fixed sampling distribution (uniform on
+$\Lambda$ unless stated otherwise). The architectural cost is one
+extra input of width $d_\lambda$ at the first layer; the per-step
+compute is one forward/backward pass at a freshly drawn~$\lambda$.
+This generalises the loss-conditional networks of
+\citet{dosovitskiy2020} from generative loss-mixture amortisation
+to the residual-loss setting in which the ``loss mixture'' is the
+PDE residual itself.
+
+\subsection{Inference: $K$-shot averaging across $\lambda$}
+\label{sec:k-shot}
+
+At evaluation time we report a single rel-$L^2$ error per task. For
+the loss-weight conditioning case there is no canonical ``true''
+weight, so following \citet{dosovitskiy2020} we average network
+predictions over $K$ samples of $\lambda$ drawn from~$p_\lambda$:
+\begin{equation}
+   \hat u(x) = \frac{1}{K}\sum_{i=1}^{K} u_\theta(x, \lambda^{(i)}),
+   \qquad \lambda^{(i)} \stackrel{\text{i.i.d.}}{\sim} p_\lambda .
+\label{eq:k-shot}
+\end{equation}
+This $K$-shot averaging exposes the variance structure of the
+LC-PINN across the loss-weight family and underpins the amortisation
+analysis in \Cref{sec:results}: a baseline PINN must be retrained
+$K$ times to produce $K$ predictions; the LC-PINN produces all $K$
+from a single training run.
+
+\subsection{$\lambda$-invariance at the LC optimum}
+
+\input{sections/theorem}
+
+\subsection{Network and training details}
+\label{sec:training-details}
+
+All experiments use a fully-connected $\tanh$ network with hidden
+widths $[64, 64, 64, 64]$, Xavier initialisation, and a single
+real-valued output head. Two conditioning routes are used: in the
+\emph{loss-weight} mode (Burgers, BL) $\lambda$ is concatenated to
+the spatial--temporal coordinates at the input layer following
+\citet{dosovitskiy2020}; in the \emph{parametric-coefficient} mode
+(Helmholtz 1D/2D/3D, Schrödinger) $\lambda$ is mapped to FiLM
+\citep{perez2018film} scale/shift parameters that modulate every
+hidden layer, followed by an L-BFGS finishing pass with a
+revert-on-worse safety check. The FiLM+L-BFGS combination is what
+buys the order-of-magnitude lift over plain concat in the
+parametric-coefficient mode (\Cref{sec:appendix-film-loss-weight}
+documents both directions). Training uses Adam
+($\eta = 10^{-3}$) with cosine annealing and gradient-norm clipping
+at~$1.0$; each step samples $\lambda \sim p_\lambda$ and evaluates
+the per-instance loss at the current batch of collocation points.
+$\lambda$ is normalised to $[-1, 1]$ before entering the network.
+Implementation: PyTorch~2.9 on Apple~M4 Max via the MPS backend.
+Full hyperparameters and per-equation collocation budgets are listed
+in \Cref{sec:appendix-hyper}.

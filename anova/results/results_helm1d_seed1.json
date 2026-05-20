@@ -1,0 +1,64 @@
+{
+  "pde": "helmholtz_1d",
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_helmholtz_seed1_film_lbfgs.pt",
+  "tag": "helm1d_seed1",
+  "meta": {
+    "conditioning": "film",
+    "hidden_dims": [
+      64,
+      64,
+      64,
+      64
+    ],
+    "n_params": 46081
+  },
+  "lc_pinn_vs_reference_rel_l2": 0.0008854627958498895,
+  "jointhdmr_val_rel_rmse": 0.04287132993340492,
+  "sobol_indices": {
+    "x": 0.1465114246080098,
+    "k": 0.21071285047140476,
+    "x/k": 0.6427757249205854
+  },
+  "history": [
+    {
+      "phase": 1,
+      "ep": 20,
+      "rel": 0.8090649843215942
+    },
+    {
+      "phase": 1,
+      "ep": 40,
+      "rel": 0.8087155222892761
+    },
+    {
+      "phase": 2,
+      "ep": 20,
+      "rel": 0.0984543040394783
+    },
+    {
+      "phase": 2,
+      "ep": 40,
+      "rel": 0.051825881004333496
+    },
+    {
+      "phase": 2,
+      "ep": 60,
+      "rel": 0.04373447969555855
+    },
+    {
+      "phase": 2,
+      "ep": 80,
+      "rel": 0.03432273864746094
+    },
+    {
+      "phase": 2,
+      "ep": 100,
+      "rel": 0.029343068599700928
+    },
+    {
+      "phase": 2,
+      "ep": 120,
+      "rel": 0.034626469016075134
+    }
+  ]
+}

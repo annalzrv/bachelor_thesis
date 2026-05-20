@@ -1,0 +1,53 @@
+{
+  "lc_pinn": {
+    "wall_seconds": 0.08068520808592439,
+    "N": 20000,
+    "d": 2,
+    "sobol_summary": {
+      "S_first": {
+        "(0,)": 0.1303928073737942,
+        "(1,)": 0.20315879228643532
+      }
+    }
+  },
+  "per_k_models": {
+    "total_wall_seconds": 0.011516916332766414,
+    "n_checkpoints": 5,
+    "per_k": [
+      {
+        "checkpoint": "relobralo_helmholtz_seed3_k1.00.pt",
+        "k": 1.0,
+        "wall_seconds": 0.0031919588800519705,
+        "S_0": 0.9927452272840657
+      },
+      {
+        "checkpoint": "relobralo_helmholtz_seed3_k10.00.pt",
+        "k": 10.0,
+        "wall_seconds": 0.0021052081137895584,
+        "S_0": 0.9884713151072354
+      },
+      {
+        "checkpoint": "relobralo_helmholtz_seed3_k3.25.pt",
+        "k": 3.25,
+        "wall_seconds": 0.0019270412158221006,
+        "S_0": 0.9970019717147147
+      },
+      {
+        "checkpoint": "relobralo_helmholtz_seed3_k5.50.pt",
+        "k": 5.5,
+        "wall_seconds": 0.0020277081057429314,
+        "S_0": 0.9993179322709282
+      },
+      {
+        "checkpoint": "relobralo_helmholtz_seed3_k7.75.pt",
+        "k": 7.75,
+        "wall_seconds": 0.002265000017359853,
+        "S_0": 1.006419877008963
+      }
+    ]
+  },
+  "speedup_sensitivity_only": 0.1427388812147781,
+  "training_minutes_avg_relobralo": 6.0,
+  "training_minutes_lc_pinn": 85.0,
+  "training_speedup_n_to_1": 0.35294117647058826
+}

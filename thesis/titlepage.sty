@@ -1,0 +1,156 @@
+% titlepage.sty — HSE FCS English VKR title page.
+% Layout follows the official HSE English template
+% "Титульный лист ВКР (ENG)" provided by the student affairs office.
+
+% ---------- internal variables ----------
+\newcommand{\@vtTitle}{}
+\newcommand{\@vtTitleRu}{}
+\newcommand{\@vtStudent}{}
+\newcommand{\@vtStudentGroup}{}
+\newcommand{\@vtStudentYear}{4th year of study}
+\newcommand{\@vtStudentDate}{}
+\newcommand{\@vtAdvisor}{}
+\newcommand{\@vtAdvisorTitle}{}
+\newcommand{\@vtAdvisorDegree}{}
+\newcommand{\@vtAdvisorAffiliation}{}
+\newcommand{\@vtCurator}{}
+\newcommand{\@vtCuratorTitle}{}
+\newcommand{\@vtCuratorDegree}{}
+\newcommand{\@vtConsultant}{}
+\newcommand{\@vtConsultantTitle}{}
+\newcommand{\@vtConsultantDegree}{}
+\newcommand{\@vtYear}{}
+\newcommand{\@vtProjectType}{Research project}
+\newcommand{\@vtFaculty}{Faculty of Computer Science}
+\newcommand{\@vtProgramme}{BSc ``Computing and Data Science''}
+\newif\if@hasCurator
+\newif\if@hasConsultant
+\newif\if@hasCoAdvisor
+\@hasCuratorfalse
+\@hasConsultantfalse
+\@hasCoAdvisorfalse
+
+% ---------- signature field helper ----------
+% \@sgnfield{width}{filled content (e.g. printed name)}{caption under the line}
+\newcommand{\@sgnfield}[3]{%
+  \parbox[t]{#1}{%
+    \hbox to #1{\hfil #2 \hfil}%
+    \vskip 2pt%
+    \hrule%
+    \vskip 2pt%
+    \hbox to #1{\hfil {\fontsize{9}{11}\selectfont #3}\hfil}%
+  }%
+}
+
+% ---------- setters ----------
+\newcommand{\setTitle}[1]{\renewcommand{\@vtTitle}{#1}}
+\newcommand{\setTitleRu}[1]{\renewcommand{\@vtTitleRu}{#1}}
+\newcommand{\setStudent}[1]{\renewcommand{\@vtStudent}{#1}}
+\newcommand{\setStudentGroup}[1]{\renewcommand{\@vtStudentGroup}{#1}}
+\newcommand{\setStudentYear}[1]{\renewcommand{\@vtStudentYear}{#1}}
+\newcommand{\setStudentDate}[1]{\renewcommand{\@vtStudentDate}{#1}}
+\newcommand{\setAdvisor}[1]{\renewcommand{\@vtAdvisor}{#1}}
+\newcommand{\setAdvisorTitle}[1]{\renewcommand{\@vtAdvisorTitle}{#1}}
+\newcommand{\setAdvisorDegree}[1]{\renewcommand{\@vtAdvisorDegree}{#1}}
+\newcommand{\setAdvisorAffiliation}[1]{\renewcommand{\@vtAdvisorAffiliation}{#1}}
+\newcommand{\setCurator}[1]{\@hasCuratortrue\renewcommand{\@vtCurator}{#1}}
+\newcommand{\setCuratorTitle}[1]{\renewcommand{\@vtCuratorTitle}{#1}}
+\newcommand{\setCuratorDegree}[1]{\renewcommand{\@vtCuratorDegree}{#1}}
+\newcommand{\setConsultant}[1]{\@hasConsultanttrue\renewcommand{\@vtConsultant}{#1}}
+\newcommand{\setConsultantTitle}[1]{\renewcommand{\@vtConsultantTitle}{#1}}
+\newcommand{\setConsultantDegree}[1]{\renewcommand{\@vtConsultantDegree}{#1}}
+\newcommand{\setYear}[1]{\renewcommand{\@vtYear}{#1}}
+\newcommand{\setProjectType}[1]{\renewcommand{\@vtProjectType}{#1}}
+\newcommand{\setFaculty}[1]{\renewcommand{\@vtFaculty}{#1}}
+\newcommand{\setProgramme}[1]{\renewcommand{\@vtProgramme}{#1}}
+
+% ---------- legacy compatibility shims ----------
+\newcommand{\setStudentSgn}[1]{}
+\newcommand{\setAdvisorSgn}[1]{}
+\newcommand{\setUDK}[1]{}
+\newcommand{\setToResearch}{}
+\newcommand{\setToProgram}{}
+\newcommand{\setGroup}[1]{\setStudentGroup{#1}}
+\newcommand{\setStageOne}{}
+\newcommand{\setStageTwo}{}
+\newcommand{\setStageFinal}{}
+\newcommand{\setGrade}[1]{}
+\newcommand{\setAdvisorDate}[1]{}
+\newcommand{\setCoAdvisor}[1]{}
+\newcommand{\setCoAdvisorTitle}[1]{}
+\newcommand{\setCoAdvisorAffiliation}[1]{}
+
+% ---------- title page ----------
+\newcommand{\makeTitlePage}{%
+\begin{titlepage}
+\selectlanguage{english}
+
+{\setstretch{1.0}
+\begin{center}
+Federal State Autonomous Educational Institution for Higher Education\\[2pt]
+National Research University\\[2pt]
+Higher School of Economics
+\end{center}
+}
+
+\vspace{1.5em}
+
+\begin{center}
+\@vtFaculty\\[6pt]
+\@vtProgramme
+\end{center}
+
+\vspace{6em}
+
+\begin{center}
+{\bf BACHELOR'S THESIS}\\[0.5em]
+({\@vtProjectType})\\[2em]
+{\bf \@vtTitle}
+\end{center}
+
+\if\relax\detokenize{\@vtTitleRu}\relax\else
+\vspace{1em}
+\begin{center}
+\selectlanguage{russian}\textit{\@vtTitleRu}\selectlanguage{english}
+\end{center}
+\fi
+
+\vspace{3em}
+
+\noindent Submitted by\\[2pt]
+student of group \@vtStudentGroup, \@vtStudentYear,
+
+\vspace{1.2em}
+
+\noindent\@sgnfield{8cm}{\@vtStudent}{Name}
+
+\vspace{0.6em}
+
+\noindent\@sgnfield{8cm}{}{Signature, Date}
+
+\vspace{1.5em}
+
+\noindent Approved by Supervisor:\\[6pt]
+\@vtAdvisorDegree, \@vtAdvisorTitle, \@vtAdvisor
+
+\if@hasCurator
+\vspace{1.5em}
+\noindent Curator:\\[6pt]
+\@vtCuratorDegree, \@vtCuratorTitle, \@vtCurator
+\fi
+
+\if@hasConsultant
+\vspace{1.5em}
+\noindent Сonsultant:\\[6pt]
+\@vtConsultantDegree, \@vtConsultantTitle, \@vtConsultant
+\fi
+
+\vspace{\fill}
+
+\begin{center}
+Moscow \@vtYear
+\end{center}
+
+\thispagestyle{empty}
+\end{titlepage}
+}

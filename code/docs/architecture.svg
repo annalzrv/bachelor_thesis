@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', sans-serif"
+     font-size="14">
+
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#424242"/>
+    </marker>
+    <marker id="ah-mod" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e65100"/>
+    </marker>
+    <filter id="card" x="-2%" y="-10%" width="104%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.8"/>
+      <feOffset dx="0" dy="1"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- title + formula -->
+  <text x="380" y="24" text-anchor="middle" fill="#1a1a1a"
+        font-weight="700" font-size="15">LC-PINN with FiLM conditioning</text>
+  <text x="380" y="44" text-anchor="middle" fill="#555" font-style="italic" font-size="12">h<tspan baseline-shift="sub" font-size="9">l</tspan> = γ<tspan baseline-shift="sub" font-size="9">l</tspan> · tanh( W<tspan baseline-shift="sub" font-size="9">l</tspan> h<tspan baseline-shift="sub" font-size="9">l−1</tspan> + b<tspan baseline-shift="sub" font-size="9">l</tspan> ) + β<tspan baseline-shift="sub" font-size="9">l</tspan></text>
+
+  <!-- λ input -->
+  <rect x="20" y="84" width="80" height="44" rx="22"
+        fill="#ffffff" stroke="#1565c0" stroke-width="1.8" filter="url(#card)"/>
+  <text x="60" y="112" text-anchor="middle" fill="#0d47a1"
+        font-weight="600" font-size="16">λ</text>
+
+  <!-- FiLM hypernet -->
+  <rect x="140" y="74" width="540" height="64" rx="8"
+        fill="#fff8e1" stroke="#e65100" stroke-width="1.8" filter="url(#card)"/>
+  <text x="410" y="98" text-anchor="middle" fill="#bf360c"
+        font-weight="600" font-size="14">FiLM hypernet</text>
+  <text x="410" y="118" text-anchor="middle" fill="#bf360c" font-size="11">2-layer MLP → produces (γ<tspan baseline-shift="sub" font-size="9">l</tspan>, β<tspan baseline-shift="sub" font-size="9">l</tspan>) for l = 1, …, L</text>
+
+  <!-- λ → FiLM arrow -->
+  <path d="M 100 106 L 134 106" stroke="#424242" stroke-width="1.6"
+        fill="none" marker-end="url(#ah)"/>
+
+  <!-- "λ resampled" annotation, near λ input -->
+  <text x="60" y="148" text-anchor="middle" fill="#666"
+        font-style="italic" font-size="10">sampled fresh</text>
+  <text x="60" y="161" text-anchor="middle" fill="#666"
+        font-style="italic" font-size="10">each step</text>
+
+  <!-- x input -->
+  <rect x="20" y="232" width="80" height="44" rx="22"
+        fill="#ffffff" stroke="#1565c0" stroke-width="1.8" filter="url(#card)"/>
+  <text x="60" y="260" text-anchor="middle" fill="#0d47a1"
+        font-weight="600" font-size="16">x</text>
+
+  <!-- backbone layers -->
+  <g filter="url(#card)">
+    <rect x="140" y="222" width="110" height="64" rx="8"
+          fill="#ffffff" stroke="#616161" stroke-width="1.5"/>
+    <text x="195" y="252" text-anchor="middle" fill="#212121" font-size="13">FC + tanh</text>
+    <text x="195" y="270" text-anchor="middle" fill="#888" font-size="10">layer 1</text>
+  </g>
+
+  <g filter="url(#card)">
+    <rect x="295" y="222" width="110" height="64" rx="8"
+          fill="#ffffff" stroke="#616161" stroke-width="1.5"/>
+    <text x="350" y="252" text-anchor="middle" fill="#212121" font-size="13">FC + tanh</text>
+    <text x="350" y="270" text-anchor="middle" fill="#888" font-size="10">layer 2</text>
+  </g>
+
+  <text x="430" y="262" text-anchor="middle" fill="#888" font-size="22">⋯</text>
+
+  <g filter="url(#card)">
+    <rect x="465" y="222" width="110" height="64" rx="8"
+          fill="#ffffff" stroke="#616161" stroke-width="1.5"/>
+    <text x="520" y="252" text-anchor="middle" fill="#212121" font-size="13">FC + tanh</text>
+    <text x="520" y="270" text-anchor="middle" fill="#888" font-size="10">layer L</text>
+  </g>
+
+  <!-- u output -->
+  <rect x="610" y="232" width="130" height="44" rx="22"
+        fill="#ffffff" stroke="#2e7d32" stroke-width="1.8" filter="url(#card)"/>
+  <text x="675" y="260" text-anchor="middle" fill="#1b5e20"
+        font-weight="600" font-size="14">u<tspan baseline-shift="sub" font-size="11">θ</tspan>(x; λ)</text>
+
+  <!-- backbone arrows -->
+  <path d="M 100 254 L 134 254" stroke="#424242" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <path d="M 250 254 L 289 254" stroke="#424242" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <path d="M 405 254 L 419 254" stroke="#424242" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <path d="M 441 254 L 459 254" stroke="#424242" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <path d="M 575 254 L 605 254" stroke="#424242" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+
+  <!-- FiLM modulation arrows (vertical, dashed, orange) -->
+  <path d="M 195 138 L 195 218" stroke="#e65100" stroke-width="1.4"
+        fill="none" stroke-dasharray="4 3" marker-end="url(#ah-mod)"/>
+  <path d="M 350 138 L 350 218" stroke="#e65100" stroke-width="1.4"
+        fill="none" stroke-dasharray="4 3" marker-end="url(#ah-mod)"/>
+  <path d="M 520 138 L 520 218" stroke="#e65100" stroke-width="1.4"
+        fill="none" stroke-dasharray="4 3" marker-end="url(#ah-mod)"/>
+
+  <!-- γ,β labels next to dashed arrows -->
+  <text x="205" y="180" fill="#bf360c" font-style="italic" font-size="11">γ<tspan baseline-shift="sub" font-size="9">1</tspan>, β<tspan baseline-shift="sub" font-size="9">1</tspan></text>
+  <text x="360" y="180" fill="#bf360c" font-style="italic" font-size="11">γ<tspan baseline-shift="sub" font-size="9">2</tspan>, β<tspan baseline-shift="sub" font-size="9">2</tspan></text>
+  <text x="530" y="180" fill="#bf360c" font-style="italic" font-size="11">γ<tspan baseline-shift="sub" font-size="9">L</tspan>, β<tspan baseline-shift="sub" font-size="9">L</tspan></text>
+
+  <!-- training-loop annotation -->
+  <text x="380" y="320" text-anchor="middle" fill="#555" font-style="italic" font-size="11">Training: λ ~ p<tspan baseline-shift="sub" font-size="9">λ</tspan> resampled at every optimisation step; minimise  E<tspan baseline-shift="sub" font-size="9">λ</tspan>[ || F<tspan baseline-shift="sub" font-size="9">λ</tspan> u<tspan baseline-shift="sub" font-size="9">θ</tspan>(·, λ) ||² ]</text>
+
+  <!-- legend strip at bottom -->
+  <g font-size="10" fill="#666">
+    <rect x="200" y="338" width="14" height="6" fill="#ffffff" stroke="#1565c0" stroke-width="1.4"/>
+    <text x="220" y="344">input</text>
+    <rect x="265" y="338" width="14" height="6" fill="#fff8e1" stroke="#e65100" stroke-width="1.4"/>
+    <text x="285" y="344">FiLM hypernet</text>
+    <rect x="380" y="338" width="14" height="6" fill="#ffffff" stroke="#616161" stroke-width="1.4"/>
+    <text x="400" y="344">backbone layer</text>
+    <rect x="490" y="338" width="14" height="6" fill="#ffffff" stroke="#2e7d32" stroke-width="1.4"/>
+    <text x="510" y="344">output</text>
+    <line x1="565" y1="341" x2="585" y2="341" stroke="#e65100" stroke-width="1.4" stroke-dasharray="3 2"/>
+    <text x="592" y="344">FiLM modulation</text>
+  </g>
+</svg>

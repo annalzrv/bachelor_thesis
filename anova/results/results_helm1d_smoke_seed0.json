@@ -1,0 +1,44 @@
+{
+  "pde": "helmholtz_1d",
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_helmholtz_seed0_film_lbfgs.pt",
+  "tag": "helm1d_smoke_seed0",
+  "meta": {
+    "conditioning": "film",
+    "hidden_dims": [
+      64,
+      64,
+      64,
+      64
+    ],
+    "n_params": 46081
+  },
+  "lc_pinn_vs_reference_rel_l2": 0.0006824072333984077,
+  "jointhdmr_val_rel_rmse": 0.051122769713401794,
+  "sobol_indices": {
+    "x": 0.14364539080491134,
+    "k": 0.19402868125714562,
+    "x/k": 0.662325927937943
+  },
+  "history": [
+    {
+      "phase": 1,
+      "ep": 20,
+      "rel": 0.809878408908844
+    },
+    {
+      "phase": 2,
+      "ep": 20,
+      "rel": 0.09907044470310211
+    },
+    {
+      "phase": 2,
+      "ep": 40,
+      "rel": 0.055811960250139236
+    },
+    {
+      "phase": 2,
+      "ep": 60,
+      "rel": 0.04073822498321533
+    }
+  ]
+}

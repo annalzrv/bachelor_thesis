@@ -1,0 +1,160 @@
+\label{sec:theorem}
+
+The empirical claim of this paper is that a single LC-PINN
+$u_\theta(x,\lambda)$, trained with $\lambda$ sampled from a probability
+measure $p_\lambda$, parameterises the parametric PDE family
+$\{F_\lambda u = 0\}_{\lambda \in \Lambda}$ \emph{simultaneously}
+in~$\lambda$. The following proposition makes precise the sense in
+which this holds at a global optimum of the LC-PINN objective.
+
+\paragraph{Setup.}
+Let $\Lambda \subseteq \mathbb{R}^{d_\lambda}$ be the parameter set,
+$p_\lambda$ a probability measure on $\Lambda$ with full support, and
+$\Omega \subseteq \mathbb{R}^{d_x}$ the spatial--temporal domain with
+sampling measure $p_\Omega$. Each $\lambda \in \Lambda$ indexes a
+residual operator $F_\lambda$ together with associated boundary,
+initial, and (optional) data-fit operators
+$\{B_\lambda, I_\lambda, D_\lambda\}$. For a candidate field
+$v: \Omega \to \mathbb{R}$, write the per-$\lambda$ functional
+\[
+   \mathcal{L}(\lambda; v) \;=\;
+     w_F\,\| F_\lambda v \|_{L^2(\Omega, p_\Omega)}^2
+   + w_B\,\| B_\lambda v \|_{L^2(\partial\Omega)}^2
+   + w_I\,\| I_\lambda v \|_{L^2(t=0)}^2
+   + w_D\,\| D_\lambda v \|_{L^2}^2 ,
+\]
+with strictly positive loss weights $(w_F, w_B, w_I, w_D)$. The
+LC-PINN training objective is the $p_\lambda$-expectation
+\[
+   J(\theta) \;=\;
+     \int_{\Lambda} \mathcal{L}\bigl(\lambda;\, u_\theta(\,\cdot\,, \lambda)\bigr)
+     \, dp_\lambda(\lambda) .
+\]
+Assume:
+\begin{itemize}\setlength{\itemsep}{0pt}
+   \item[(A1)] the network class
+         $\{u_\theta(\cdot, \lambda) : \theta \in \Theta\}$ contains,
+         for every $\lambda$, a residual-minimiser
+         $u^\star_\lambda \in \arg\min_v \mathcal{L}(\lambda; v)$ with
+         $\mathcal{L}(\lambda; u^\star_\lambda) = 0$;
+   \item[(A2)] the map
+         $\lambda \mapsto \mathcal{L}(\lambda; u_\theta(\cdot,\lambda))$
+         is $dp_\lambda$-integrable for every $\theta$;
+   \item[(A3)] $u_\theta$ is jointly continuous in $(x, \lambda)$.
+\end{itemize}
+
+\begin{proposition}[Residual-minimiser at the LC optimum]
+\label{prop:lc-invariance}
+Let $\theta^\star \in \arg\min_\theta J(\theta)$. Under
+\textnormal{(A1)--(A3)}, for $p_\lambda$-almost every
+$\lambda \in \Lambda$ the section
+$u_{\theta^\star}(\cdot, \lambda)$ is a residual-minimiser of the
+parametric PDE indexed by~$\lambda$:
+\[
+   \mathcal{L}\bigl(\lambda;\, u_{\theta^\star}(\,\cdot\,, \lambda)\bigr)
+   \;=\; 0
+   \qquad\text{for }\; p_\lambda\text{-a.e.\ } \lambda \in \Lambda .
+\]
+In particular, on $\operatorname{supp}(p_\lambda)$ the LC-PINN section
+satisfies $F_\lambda u_{\theta^\star}(\cdot,\lambda) = 0$ in
+$L^2(\Omega, p_\Omega)$ and the auxiliary constraints to the same
+precision.
+\end{proposition}
+
+\paragraph{Sketch proof.}
+The integrand
+$\lambda \mapsto \mathcal{L}(\lambda; u_\theta(\cdot,\lambda))$ is
+non-negative for every $\theta$ and every $\lambda$, since each summand
+is a squared $L^2$-norm. By (A1) the per-$\lambda$ minimum is zero, so
+$\inf_\theta J(\theta) \ge 0$ and the lower bound is attainable: any
+measurable selector $\lambda \mapsto \theta_\lambda$ with
+$u_{\theta_\lambda}(\cdot, \lambda) = u^\star_\lambda$ exists pointwise
+under (A1), and a single $\theta^\star$ achieving $J(\theta^\star) = 0$
+exists when the network class is rich enough to parameterise the family
+$\{u^\star_\lambda\}_{\lambda \in \Lambda}$ jointly (e.g.\ universal
+approximation in $C(\Omega \times \Lambda)$). For such $\theta^\star$,
+\[
+   0 \;=\; J(\theta^\star)
+   \;=\; \int_{\Lambda}
+            \mathcal{L}\bigl(\lambda;\, u_{\theta^\star}(\,\cdot\,, \lambda)\bigr)
+         \, dp_\lambda(\lambda) ,
+\]
+and the integrand is non-negative; the standard
+``vanishing-integral of a non-negative function'' lemma then gives
+$\mathcal{L}(\lambda; u_{\theta^\star}(\cdot,\lambda)) = 0$ for
+$p_\lambda$-a.e.~$\lambda$. \hfill$\square$
+
+\paragraph{Remark 1 (where the support assumption matters).}
+The conclusion is a $p_\lambda$-a.e.\ statement on $\Lambda$: nothing
+prevents the LC-PINN from being arbitrarily wrong on a
+$p_\lambda$-null set, including the boundary of $\Lambda$ if
+$p_\lambda$ has no mass there. In our experiments
+$p_\lambda = \mathrm{Uniform}(\Lambda)$ has full support, so the
+$p_\lambda$-a.e.\ statement coincides with Lebesgue-a.e.\ on
+$\Lambda$.
+
+\begin{corollary}[Finite-capacity LC bound]
+\label{cor:finite-capacity}
+Replace assumption \textnormal{(A1)} by the weaker
+\emph{$\varepsilon$-residual capacity} condition: there exists
+$\bar\theta \in \Theta$ with
+$\mathcal{L}(\lambda; u_{\bar\theta}(\cdot,\lambda)) \le \varepsilon$
+for $p_\lambda$-a.e.\ $\lambda$. Suppose the optimiser reaches an
+objective value within $\delta$ of the infimum:
+$J(\theta^\star) \le \inf_\theta J(\theta) + \delta$. Then for every
+$\eta > 0$,
+\[
+   \Pr_{\lambda \sim p_\lambda}\!\left[
+      \mathcal{L}\bigl(\lambda;\, u_{\theta^\star}(\,\cdot\,, \lambda)\bigr)
+      \;>\; \varepsilon + \eta
+   \right]
+   \;\le\; \frac{\delta}{\eta} ,
+\]
+i.e.\ on a $p_\lambda$-set of mass $\ge 1 - \delta/\eta$ the
+per-$\lambda$ residual loss is at most $\varepsilon + \eta$.
+\end{corollary}
+
+\paragraph{Sketch.}
+By definition of $\bar\theta$ and (A2),
+$\inf_\theta J(\theta) \le J(\bar\theta) \le \varepsilon$, so
+$J(\theta^\star) \le \varepsilon + \delta$. Let
+$g(\lambda) = \mathcal{L}(\lambda; u_{\theta^\star}(\cdot,\lambda)) -
+\varepsilon$, which is $p_\lambda$-a.e.\ bounded below by
+$-\varepsilon$ but in particular below by zero on the
+$p_\lambda$-set where the comparator $\bar\theta$ achieves the
+$\varepsilon$-bound. Markov's inequality applied to the
+non-negative part $g_+ = \max(g, 0)$ gives
+$\Pr[g_+ > \eta] \le \mathbb{E}[g_+]/\eta \le \delta/\eta$.
+\hfill$\square$
+
+This is the practically observable form of the
+$\lambda$-invariance result: it bounds the per-$\lambda$ loss for
+\emph{any} suboptimal $\theta^\star$ by the realisable residual
+budget plus the optimisation gap, and matches the per-$\lambda$
+rel-$L^2$ tables in \Cref{sec:results}.
+
+\paragraph{Remark 2 (sampling-distribution invariance).}
+If $p_\lambda$ and $\tilde p_\lambda$ are two probability measures
+with the same support $\Lambda_0 \subseteq \Lambda$, the sets of
+\emph{a.e.-residual-minimisers} on $\Lambda_0$ coincide. So the
+optimum-set of the LC objective on $\operatorname{supp}(p_\lambda)$
+does not depend on the precise sampling law---only on the support.
+This is an asymptotic statement; at finite training budget the law
+of $p_\lambda$ governs which slices receive enough gradient signal,
+which we observe empirically (\Cref{sec:results-ablations}).
+
+\paragraph{Remark 3 (sample complexity per step).}
+\label{rem:sample}
+At each Adam step the gradient is built from $n_\lambda$ i.i.d.\
+draws of $\lambda \sim p_\lambda$. Conditional on $\theta$, the
+per-step gradient estimator
+$\hat g_{n_\lambda} = \frac{1}{n_\lambda}\sum_{i=1}^{n_\lambda}
+\nabla_\theta \mathcal{L}(\lambda_i; u_\theta(\cdot,\lambda_i))$
+is unbiased for $\nabla_\theta J(\theta)$, and if the per-$\lambda$
+gradient norm is $p_\lambda$-essentially bounded by $G$ then
+$\Pr[\| \hat g_{n_\lambda} - \nabla J \|_\infty > t] \le
+2 \exp(-n_\lambda t^2 / 2 G^2)$ by Hoeffding. The variance of the
+estimate is $O(1/n_\lambda)$, so the regime $n_\lambda \!\sim\! 4$
+empirically chosen in \Cref{sec:results-ablations} corresponds to
+the sweet spot between gradient noise (small $n_\lambda$) and
+budget concentration (large $n_\lambda$ at fixed total step count).

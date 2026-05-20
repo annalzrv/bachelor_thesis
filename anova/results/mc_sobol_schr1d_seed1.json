@@ -1,0 +1,15 @@
+{
+  "checkpoint": "/Users/anna/Desktop/research/thesis/code/checkpoints/lc_pinn_schrodinger_seed1_film_lbfgs.pt",
+  "var_Y": 0.10750651323649353,
+  "S_first": {
+    "(0,)": 0.9926501738304147,
+    "(1,)": 0.020266993568983135
+  },
+  "S_total": {
+    "(0,)": 0.9805175650754343,
+    "(1,)": 0.013234419109858215
+  },
+  "S_pair": {
+    "(0, 1)": -0.007634796234149347
+  }
+}

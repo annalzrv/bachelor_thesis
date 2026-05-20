@@ -1,0 +1,96 @@
+% packages.sty — core LaTeX packages for the thesis.
+%
+% Engine: LuaLaTeX (handles Cyrillic via PT Serif without needing T2A encoding).
+% This file mirrors the official KNAD VKR template's package list, adapted
+% for LuaLaTeX. To switch to pdfLaTeX, replace fontspec + setmainfont with
+% \usepackage[utf8]{inputenc} + \usepackage[T2A]{fontenc} (then run
+% `sudo tlmgr install cyrillic`).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{packages}[2026/05/19 Thesis core packages, LuaLaTeX]
+
+% --- fonts via fontspec (PT Serif is system-installed on macOS, has Cyrillic) ---
+\RequirePackage{fontspec}
+\setmainfont{PT Serif}
+\setsansfont{PT Sans}
+\setmonofont{Menlo}
+
+% --- babel for language switching (main English; Russian for the abstract section) ---
+% Modern LuaLaTeX-compatible syntax: load babel without options, then
+% \babelprovide each language.
+\RequirePackage{babel}
+\babelprovide[main, import]{english}
+\babelprovide[import]{russian}
+
+% --- geometry per HSE guidelines ---
+\RequirePackage[a4paper, left=2.5cm, right=1.0cm, top=2.0cm, bottom=2.0cm]{geometry}
+
+% --- line spacing + first-line indent on every paragraph (incl. first of section) ---
+\RequirePackage{setspace}
+\RequirePackage{indentfirst}
+
+% --- maths ---
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
+
+% --- graphics ---
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+% --- tables ---
+\RequirePackage{booktabs}
+% Optional (uncomment after `sudo tlmgr install multirow adjustbox colortbl threeparttable tablefootnote`):
+% \RequirePackage{multirow}
+% \RequirePackage{adjustbox}
+% \RequirePackage{colortbl}
+% \RequirePackage[flushleft]{threeparttable}
+% \RequirePackage{tablefootnote}
+
+% --- captions + subcaption (multi-panel figures) ---
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\captionsetup{font=small, labelfont=bf}
+
+% --- lists ---
+\RequirePackage{enumitem}
+
+% --- listings (with the official Python style from Шаблон_ВКР_КНАД) ---
+\RequirePackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black}\itshape,
+    stringstyle=\color{red!60!black},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    captionpos=b,
+    xleftmargin=1.25cm,
+    xrightmargin=1.0cm,
+    numbersep=5pt,
+    extendedchars=true,
+    keepspaces=true,
+}
+
+% --- algorithms (optional, uncomment after `sudo tlmgr install algorithms algorithmicx`) ---
+% \RequirePackage{algorithm}
+% \RequirePackage{algpseudocode}
+
+% --- figure placement ---
+\RequirePackage{float}
+
+% --- bibliography: biblatex + biber, numeric style as required by HSE guidelines ---
+\RequirePackage{csquotes}
+\RequirePackage[backend=biber, style=numeric, maxbibnames=99, sorting=none]{biblatex}
+
+% --- hyperlinks: coloured text (no boxes), TOC links black, urls dark blue ---
+\RequirePackage{hyperref}
+
+% --- header / footer (used by the official template) ---
+\RequirePackage{fancyhdr}
